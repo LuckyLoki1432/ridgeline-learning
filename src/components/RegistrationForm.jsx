@@ -1,0 +1,17 @@
+import {useState} from 'react';
+import {programs} from './Programs.jsx';
+import styles from '../App.module.css';
+const initial={name:'',email:'',program:'',consent:false};
+export default function RegistrationForm(){
+ const [values,setValues]=useState(initial);const [errors,setErrors]=useState({});const [submitted,setSubmitted]=useState(false);
+ const update=(field,value)=>{setValues(v=>({...v,[field]:value}));setErrors(e=>({...e,[field]:''}));setSubmitted(false)};
+ const validate=()=>{const e={};const name=values.name.trim();if(name.length<2||name.length>80)e.name='Enter a name between 2 and 80 characters.';if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email.trim()))e.email='Enter a valid email address.';if(!programs.some(p=>p.name===values.program))e.program='Choose one of the listed programs.';if(!values.consent)e.consent='Please agree to be contacted.';return e};
+ const submit=event=>{event.preventDefault();const next=validate();setErrors(next);if(!Object.keys(next).length){setSubmitted(true);setValues(initial)}};
+ return <section id="register" className={styles.registration} aria-labelledby="register-title"><div className={styles.registrationCopy}><h2 id="register-title">Start with a conversation</h2><p>Tell us what you want to learn. We will display a confirmation on this page after your form passes validation.</p><p className={styles.privacyHint}>Your details stay in this page preview. Nothing is sent or stored.</p></div><form className={styles.form} onSubmit={submit} noValidate>
+ <div className={styles.field}><label htmlFor="full-name">Full name</label><input id="full-name" name="name" autoComplete="name" value={values.name} onChange={e=>update('name',e.target.value)} aria-invalid={Boolean(errors.name)} aria-describedby={errors.name?'name-error':undefined} placeholder="Your name"/>{errors.name&&<p className={styles.error} id="name-error">{errors.name}</p>}</div>
+ <div className={styles.field}><label htmlFor="email">Email address</label><input id="email" name="email" type="email" autoComplete="email" value={values.email} onChange={e=>update('email',e.target.value)} aria-invalid={Boolean(errors.email)} aria-describedby={errors.email?'email-error':undefined} placeholder="you@example.com"/>{errors.email&&<p className={styles.error} id="email-error">{errors.email}</p>}</div>
+ <div className={styles.field}><label htmlFor="program">Program interest</label><select id="program" name="program" value={values.program} onChange={e=>update('program',e.target.value)} aria-invalid={Boolean(errors.program)} aria-describedby={errors.program?'program-error':undefined}><option value="">Select a program</option>{programs.map(p=><option key={p.name} value={p.name}>{p.name}</option>)}</select>{errors.program&&<p className={styles.error} id="program-error">{errors.program}</p>}</div>
+ <div className={styles.formBottom}><div className={styles.consentField}><input id="consent" type="checkbox" checked={values.consent} onChange={e=>update('consent',e.target.checked)} aria-invalid={Boolean(errors.consent)} aria-describedby={errors.consent?'consent-error':undefined}/><label htmlFor="consent">I agree to be contacted about my enquiry.</label>{errors.consent&&<p className={styles.error} id="consent-error">{errors.consent}</p>}</div><button className={styles.submitButton} type="submit">Send enquiry</button></div>
+ {submitted&&<p className={styles.success} role="status" aria-live="polite">Thanks for your interest. Your enquiry has been checked on this page. No message has been sent.</p>}
+ </form></section>
+}
