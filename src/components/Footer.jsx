@@ -1,0 +1,2 @@
+import styles from '../App.module.css';
+export default function Footer(){return <footer className={styles.footer}><div><strong>RIDGELINE LEARNING</strong><p>Skills for the next horizon.</p><p className={styles.footerPrivacy}>Enquiries are validated locally in this site preview. Details are not saved or transmitted.</p></div><nav aria-label="Footer navigation"><a href="#programs">Programs</a><a href="#register">Registration</a><a href="#top">Back to top ↑</a></nav><small>© 2026 Ridgeline Learning.</small></footer>}
