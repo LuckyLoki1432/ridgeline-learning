@@ -1,50 +1,67 @@
-# Ridgeline Learning landing page
+# Ridgeline Learning
 
-Responsive React landing page built from the supplied desktop and mobile design references.
-
-## Features
-- Semantic HTML landmarks and responsive navigation with an accessible mobile menu.
-- Hero, benefits, program cards, registration form, FAQ and footer.
-- Reusable React components and CSS Modules using Grid and Flexbox.
-- Controlled registration inputs with required name, email, program and consent validation.
-- Field-level accessible error messages and local-only success confirmation.
-- No personal data is transmitted or persisted.
-- Custom SVG brand logo and illustrations; no external image requests.
+Responsive, accessible React landing page built with Vite. The site includes a header and mobile navigation, hero, benefits, program cards, local-only registration form, FAQ and footer.
 
 ## Requirements
-- Node.js 18+
-- npm 9+
 
-## Setup
+- Node.js 20 or later and npm.
+- React 18, Vite 5 and CSS Modules.
+- Semantic HTML landmarks and labelled form controls.
+- Responsive layouts for mobile, tablet and desktop.
+- Keyboard-operable navigation, Escape-to-close mobile menu, visible focus states and reduced-motion support.
+- Controlled form fields with validation, field-level errors, focus on the first invalid field and an announced local success message.
+- No analytics, external API, form backend, personal-data transmission or persistence.
+
+## Run locally
+
 ```bash
 npm install
 npm run dev
 ```
-Vite normally serves the app at http://localhost:5173.
 
-## Production
+Vite serves the app at http://localhost:5173.
+
+## Build and preview
+
 ```bash
 npm run build
 npm run preview
 ```
-The build output is `dist/`. Deploy with Vercel or Netlify using build command `npm run build` and output directory `dist`.
 
-## Structure
+The production output is `dist/`. Vercel/Netlify build command: `npm run build`; output directory: `dist`.
+
+## Automated quality checks
+
+```bash
+npm test                 # React component and form tests
+npx playwright install   # Install browser binaries once
+npm run test:e2e         # Chromium + Firefox acceptance tests
+npm run test:lighthouse  # Lighthouse score gates
+```
+
+The Playwright suite checks the page structure, internal navigation, mobile menu keyboard dismissal, form validation and local confirmation, absence of horizontal overflow at 320, 390, 768, 1200 and 1440 CSS pixels, and automated WCAG 2.1 A/AA accessibility rules. Lighthouse CI enforces minimum 90/100 Accessibility and Best Practices scores.
+
+GitHub Actions runs unit tests, the production build, browser acceptance tests and Lighthouse checks for pushes and pull requests to `main`. A green workflow is required evidence; do not mark acceptance cases passed before it runs successfully.
+
+## Project structure
+
 ```text
 src/
-  components/   # Header, Hero, Benefits, Programs, RegistrationForm, FAQ, Footer
-  styles/       # global base styles
+  components/       Header, Hero, Benefits, Programs, RegistrationForm, FAQ, Footer
+  styles/base.css   Global styles and focus/reduced-motion defaults
+  test/             Vitest + Testing Library tests
   App.jsx
   App.module.css
   main.jsx
-public/images/  # SVG logo and illustrations
+e2e/                Playwright acceptance tests
+public/images/      Local SVG logo and illustrations
+.github/workflows/  CI quality workflow
 ```
 
-## Dependencies
-React 18, React DOM 18 and Vite 5. No analytics, external API, form backend or UI framework.
+## Privacy behaviour
 
-## Registration privacy
-This is a frontend demonstration. Form validation occurs in the browser and successful submission displays an on-page confirmation. The data is not sent to a server, emailed or saved.
+The registration form validates in the browser and displays an on-page confirmation. It does not send, email, or persist the entered information. The consent checkbox confirms that visitors understand this local-demo behaviour; it is not a marketing opt-in.
 
-## Accessibility and verification
-Labels, field descriptions, `aria-invalid`, live confirmation, keyboard focus styles, menu expanded state, Escape-to-close, semantic sections and reduced-motion support are included. Verify the deployed page at 320, 390, 768, 1200 and 1440 CSS pixels. Run Chrome/Firefox checks and Lighthouse before recording scores; no unrun test is marked as passed.
+## Manual release checklist
+
+Before release, confirm the deployed page visually in Chrome and Firefox at the target widths, verify keyboard navigation and form behaviour, review the CI run, and inspect Lighthouse results. The acceptance log must reflect actual test results, not assumptions.
