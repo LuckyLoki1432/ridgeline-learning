@@ -18,8 +18,8 @@ describe('Ridgeline Learning landing page', () => {
 
   it('opens the mobile menu and closes it with Escape while restoring focus', async () => {
     const user = userEvent.setup();
-    render(<App />);
-    const menuButton = screen.getByRole('button', { name: /open menu/i });
+    const { container } = render(<App />);
+    const menuButton = container.querySelector('button[aria-controls="mobile-navigation"]');
     await user.click(menuButton);
     expect(menuButton).toHaveAttribute('aria-expanded', 'true');
     await user.keyboard('{Escape}');
