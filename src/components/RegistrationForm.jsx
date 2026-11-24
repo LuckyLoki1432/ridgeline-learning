@@ -10,7 +10,7 @@ function validate(values) {
   if (name.length < 2 || name.length > 80) errors.name = 'Enter a name between 2 and 80 characters.';
   if (!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(values.email.trim())) errors.email = 'Enter a valid email address.';
   if (!programs.some((program) => program.name === values.program)) errors.program = 'Choose one of the listed programs.';
-  if (!values.consent) errors.consent = 'Please agree to be contacted.';
+  if (!values.consent) errors.consent = 'Please confirm you understand the privacy notice.';
   return errors;
 }
 
@@ -87,7 +87,7 @@ export default function RegistrationForm() {
         <div className={styles.formBottom}>
           <div className={styles.consentField}>
             <input ref={consentRef} id="consent" name="consent" type="checkbox" required checked={values.consent} onChange={(event) => update('consent', event.target.checked)} aria-required="true" aria-invalid={Boolean(errors.consent)} aria-describedby={errors.consent ? 'consent-error' : undefined} />
-            <label htmlFor="consent">I agree to be contacted about my enquiry.</label>
+            <label htmlFor="consent">I understand this demo will not send or store my details.</label>
             {errors.consent && <p className={styles.error} id="consent-error">{errors.consent}</p>}
           </div>
           <button className={styles.submitButton} type="submit">Send enquiry</button>
