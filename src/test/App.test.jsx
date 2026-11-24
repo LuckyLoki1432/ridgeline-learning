@@ -42,7 +42,7 @@ describe('Ridgeline Learning landing page', () => {
     await user.type(screen.getByLabelText(/full name/i), 'Alex Learner');
     await user.type(screen.getByLabelText(/email address/i), 'alex@example.com');
     await user.selectOptions(screen.getByLabelText(/program interest/i), 'Foundations of Digital Work');
-    await user.click(screen.getByLabelText(/agree to be contacted/i));
+    await user.click(screen.getByLabelText(/understand this demo will not send or store my details/i));
     await user.click(screen.getByRole('button', { name: /send enquiry/i }));
     expect(await screen.findByRole('status')).toHaveTextContent(/no message has been sent/i);
     expect(screen.getByLabelText(/full name/i)).toHaveValue('');
