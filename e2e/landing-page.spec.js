@@ -47,7 +47,7 @@ test('registration reports invalid fields and confirms locally when valid', asyn
   await page.getByLabel('Full name').fill('Alex Learner');
   await page.getByLabel('Email address').fill('alex@example.com');
   await page.getByLabel('Program interest').selectOption('Foundations of Digital Work');
-  await page.getByLabel(/agree to be contacted/i).check();
+  await page.getByLabel(/understand this demo will not send or store my details/i).check();
   await page.getByRole('button', { name: /send enquiry/i }).click();
   await expect(page.getByRole('status')).toContainText(/no message has been sent/i);
 });
