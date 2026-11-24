@@ -1,0 +1,21 @@
+Test_ID,Area,Viewport_or_Environment,Expected_Result,Actual_Result,Pass_Fail_Not_Tested,Tester_Notes
+T01,Build,Node/Vite,Production build completes,Pending,Not Tested,Run npm run build
+T02,Navigation,Desktop,Header anchors reach correct sections,Pending,Not Tested,Verify links
+T03,Navigation,390px,Mobile menu opens and closes,Pending,Not Tested,Verify menu and Escape key
+T04,Keyboard,All,Visible focus and keyboard operation,Pending,Not Tested,Manual keyboard review
+T05,Hero,1440px,Two-column layout matches reference,Pending,Not Tested,Visual review
+T06,Hero,320px,No overlap or horizontal scroll,Pending,Not Tested,Responsive review
+T07,Benefits,768px,Cards reflow cleanly,Pending,Not Tested,Responsive review
+T08,Programs,390px,Program cards readable,Pending,Not Tested,Responsive review
+T09,Registration,All,Required name validation,Pending,Not Tested,Submit blank name
+T10,Registration,All,Email validation,Pending,Not Tested,Submit malformed email
+T11,Registration,All,Program validation,Pending,Not Tested,Submit without program
+T12,Registration,All,Consent validation,Pending,Not Tested,Submit without consent
+T13,Registration,All,Local confirmation without transmission,Pending,Not Tested,Submit valid details
+T14,Responsive,320px,No horizontal scroll,Pending,Not Tested,Browser test
+T15,Responsive,390px,No horizontal scroll,Pending,Not Tested,Browser test
+T16,Responsive,768px,No horizontal scroll,Pending,Not Tested,Browser test
+T17,Responsive,1200px and 1440px,No horizontal scroll,Pending,Not Tested,Browser test
+T18,Browser,Chrome and Firefox,No console errors,Pending,Not Tested,Cross-browser test
+T19,Lighthouse,Deployed build,Accessibility score 90+,Pending,Not Tested,Run Lighthouse
+T20,Lighthouse,Deployed build,Best Practices score 90+,Pending,Not Tested,Run Lighthouse
