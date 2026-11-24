@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import AxeBuilder from '@axe-core/playwright';
 
 const widths = [320, 390, 768, 1200, 1440];
 
@@ -49,4 +50,10 @@ test('registration reports invalid fields and confirms locally when valid', asyn
   await page.getByLabel(/agree to be contacted/i).check();
   await page.getByRole('button', { name: /send enquiry/i }).click();
   await expect(page.getByRole('status')).toContainText(/no message has been sent/i);
+});
+
+test('page has no automatically detectable WCAG 2.1 AA violations', async ({ page }) => {
+  await page.goto('/');
+  const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa']).analyze();
+  expect(results.violations).toEqual([]);
 });
