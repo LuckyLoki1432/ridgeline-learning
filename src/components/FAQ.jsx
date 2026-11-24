@@ -1,0 +1,3 @@
+import styles from '../App.module.css';
+const faqs=[['Are the programs beginner-friendly?','Yes. Each program states its recommended starting level.'],['How is progress tracked?','Through practical milestones and mentor feedback.'],['Do I need to register immediately?','No. Explore the programs first and submit an enquiry when you are ready.']];
+export default function FAQ(){return <section id="faq" className={styles.faq} aria-labelledby="faq-title"><h2 id="faq-title">Frequently asked questions</h2><div className={styles.faqList}>{faqs.map(([q,a])=><article key={q}><h3>{q}</h3><p>{a}</p></article>)}</div></section>}
